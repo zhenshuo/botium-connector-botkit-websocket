@@ -33,7 +33,7 @@ class BotiumConnectorBotkitWebsocket {
 
   Start () {
     debug('Start called')
-    this.userId = s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4()
+    this.userId = this.s4() + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + this.s4() + this.s4()
 
 
     const socket = new WebSocket(this.caps[Capabilities.BOTKIT_SERVER_URL])
