@@ -57,6 +57,9 @@ class BotiumConnectorBotkitWebsocket {
           user_profile: null
         }));
 
+        // wait 10 sec
+        setTimeout(()=> {}, 10);
+
         console.log("websocket open, user says hello to bot")
 
         resolve()
