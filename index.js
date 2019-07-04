@@ -10,7 +10,6 @@ class BotiumConnectorBotkitWebsocket {
     this.queueBotSays = queueBotSays
     this.caps = caps
     this.counter = 1
-    this.sessionIdPrefix = 'test' + new Date().getTime()
   }
 
   Validate () {
@@ -26,10 +25,16 @@ class BotiumConnectorBotkitWebsocket {
     debug('Build called')
   }
 
+  s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
   Start () {
     debug('Start called')
-    this.sessionId = this.sessionIdPrefix + this.counter
-    this.counter++
+    this.userId = s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4()
+
 
     const socket = new WebSocket(this.caps[Capabilities.BOTKIT_SERVER_URL])
     this.socket = socket
@@ -59,7 +64,7 @@ class BotiumConnectorBotkitWebsocket {
     const message = {
       type: 'message',
       text: messageText,
-      user: this.sessionId,
+      user: this.userId,
       channel: 'socket'
     }
 
