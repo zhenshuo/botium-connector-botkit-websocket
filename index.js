@@ -31,10 +31,13 @@ class BotiumConnectorBotkitWebsocket {
       .substring(1);
   }
 
+  deliverMessage(message) {
+    socket.send(JSON.stringify(message));
+  }
+
   Start () {
     debug('Start called')
     this.userId = this.s4() + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + this.s4() + this.s4()
-
 
     const socket = new WebSocket(this.caps[Capabilities.BOTKIT_SERVER_URL])
     this.socket = socket
@@ -51,6 +54,14 @@ class BotiumConnectorBotkitWebsocket {
 
     return new Promise((resolve, reject) => {
       socket.on('open', function () {
+        this.deliverMessage({
+          type: "hello",
+          user: this.userId,
+          channel: "socket",
+          user_profile: null
+        });
+        console.log("websocket open, user " + this.userId + " says hello to bot")
+
         resolve()
       })
       socket.on('error', function (err) {
